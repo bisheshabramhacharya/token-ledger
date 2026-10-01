@@ -1,7 +1,6 @@
 import AppKit
 
-/// Menu-bar icon: an SF Symbol picked in IconLab, shared style across Bishesha's apps.
-/// The app icon uses the same symbol (~/Documents/Projects/app-icons/make-icons.swift).
+/// Menu bar icon. A template image, so macOS tints it for light and dark menu bars.
 enum MenuBarIcon {
     static let image: NSImage = {
         let config = NSImage.SymbolConfiguration(pointSize: 15, weight: .regular)

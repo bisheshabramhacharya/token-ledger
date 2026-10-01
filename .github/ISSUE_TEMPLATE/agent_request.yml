@@ -1,0 +1,14 @@
+name: Support another agent
+description: Ask Token Ledger to track a coding agent it doesn't support yet
+body:
+  - type: input
+    id: agent
+    attributes:
+      label: Agent name and link
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Where does it keep its logs?
+      description: The folder it writes sessions to, if you know it, and a redacted sample line that shows token usage.

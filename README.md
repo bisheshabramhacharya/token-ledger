@@ -12,6 +12,9 @@ Every agent, plan, and model, in one place.
 
 [**Download**](https://github.com/bisheshabramhacharya/token-ledger/releases/latest/download/TokenLedger.zip) · [Watch the demo](docs/demo.mp4) · macOS 14+ · Apple Silicon & Intel · Free and open source
 
+[![Build](https://github.com/bisheshabramhacharya/token-ledger/actions/workflows/build.yml/badge.svg)](https://github.com/bisheshabramhacharya/token-ledger/actions/workflows/build.yml)
+[![Latest release](https://img.shields.io/github/v/release/bisheshabramhacharya/token-ledger)](https://github.com/bisheshabramhacharya/token-ledger/releases/latest)
+
 <img src="docs/screenshot.png" width="420" alt="Token Ledger showing a month of usage across six coding agents">
 
 </div>
@@ -110,6 +113,21 @@ git clone https://github.com/bisheshabramhacharya/token-ledger.git
 cd token-ledger
 scripts/bundle.sh             # builds and installs to ~/Applications
 scripts/bundle.sh --release   # universal build zipped in build/
+```
+
+## Troubleshooting
+
+- **The panel says "No usage in this period".** Check that the agent's folder from the table above exists and has recent sessions. Codex users with a custom `CODEX_HOME` aren't picked up yet.
+- **Costs look low or a note says some tokens aren't in the total.** The model isn't in the public price list yet. Add its price under `priceOverrides` in Config.
+- **Everything shows $0 on first launch.** The price list couldn't download. It retries on the next refresh, so check your connection and click refresh.
+- **Something else?** [Open an issue](https://github.com/bisheshabramhacharya/token-ledger/issues/new/choose). The template asks for exactly what's needed.
+
+## Uninstall
+
+Quit from the panel, then:
+
+```sh
+rm -rf /Applications/TokenLedger.app ~/Applications/TokenLedger.app "$HOME/Library/Application Support/TokenLedger"
 ```
 
 ## Notes

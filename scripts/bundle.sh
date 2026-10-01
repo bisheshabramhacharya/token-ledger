@@ -4,7 +4,7 @@
 #   scripts/bundle.sh --release  build a universal (Apple Silicon + Intel) app and zip it in build/
 set -e
 cd "$(dirname "$0")/.."
-VERSION=1.0.0
+VERSION=${VERSION:-1.0.1}
 app=build/TokenLedger.app
 rm -rf "$app"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"

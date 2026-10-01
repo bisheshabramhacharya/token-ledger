@@ -123,6 +123,8 @@ struct LedgerView: View {
         .frame(width: 460)
         .background(Theme.background)
         .environment(\.colorScheme, .dark)
+        // Also darkens the menu window itself, so the panel looks the same when the Mac is in light mode.
+        .preferredColorScheme(.dark)
     }
 }
 
@@ -293,13 +295,13 @@ private struct DailyChart: View {
 
 /// The curves and fills, rasterized on the GPU. Equatable so hovering never redraws it;
 /// a new `.id` (period change) replays the left-to-right sweep.
-private struct PlotLayer: View, @MainActor Equatable {
+private struct PlotLayer: View, Equatable {
     let series: [ChartSeries]
     let top: Double
     @State private var progress: CGFloat = 0
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    static func == (a: Self, b: Self) -> Bool { a.series == b.series && a.top == b.top }
+    nonisolated static func == (a: Self, b: Self) -> Bool { a.series == b.series && a.top == b.top }
 
     var body: some View {
         ZStack {

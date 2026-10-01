@@ -1,0 +1,30 @@
+name: Bug report
+description: Something is wrong or missing
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did you see instead? Screenshots help.
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and chip
+      placeholder: macOS 15.4, Apple Silicon
+    validations:
+      required: true
+  - type: input
+    id: agents
+    attributes:
+      label: Which agents do you use?
+      placeholder: Claude Code, Codex
+  - type: textarea
+    id: report
+    attributes:
+      label: Report output (optional)
+      description: |
+        Run this in Terminal and paste the result. It contains token counts and model names only.
+        `/Applications/TokenLedger.app/Contents/MacOS/TokenLedger --report month`
+      render: text

@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build universal app
+        run: |
+          case "$GITHUB_REF" in refs/tags/v*) export VERSION="${GITHUB_REF_NAME#v}" ;; esac
+          scripts/bundle.sh --release
+
+      - name: Smoke test
+        run: |
+          lipo -archs build/TokenLedger.app/Contents/MacOS/TokenLedger
+          build/TokenLedger.app/Contents/MacOS/TokenLedger --report all
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TokenLedger
+          path: build/TokenLedger.zip
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" build/TokenLedger.zip \
+            --title "Token Ledger ${GITHUB_REF_NAME#v}" --generate-notes
