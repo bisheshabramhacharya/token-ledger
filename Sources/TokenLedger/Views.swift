@@ -1,4 +1,5 @@
 import SwiftUI
+import ServiceManagement
 
 extension Harness {
     var color: Color {
@@ -26,6 +27,7 @@ private enum Theme {
 struct LedgerView: View {
     @Bindable var store: Store
     @State private var tab = Tab.plans
+    @State private var opensAtLogin = SMAppService.mainApp.status == .enabled
 
     enum Tab: String, CaseIterable { case plans = "Plans", harness = "Harness", models = "Models" }
 
@@ -103,6 +105,13 @@ struct LedgerView: View {
             HStack(spacing: 14) {
                 Text(store.updated.map { "Updated \($0.formatted(date: .omitted, time: .shortened))" } ?? "")
                 Spacer()
+                Button {
+                    let app = SMAppService.mainApp
+                    if app.status == .enabled { try? app.unregister() } else { try? app.register() }
+                    opensAtLogin = app.status == .enabled
+                } label: {
+                    Label("Open at login", systemImage: opensAtLogin ? "checkmark.circle.fill" : "circle")
+                }
                 Button("Config") { NSWorkspace.shared.open(Paths.config) }
                 Button("Quit") { NSApp.terminate(nil) }
             }

@@ -36,6 +36,8 @@ struct Config: Codable, Sendable {
     var priceOverrides: [String: ManualPrice]
     /// Plan/provider names left out of every total.
     var hidden: [String]?
+    /// Harness name -> plan name, e.g. "Claude Code": "Claude Max". Overrides the built-in plan names.
+    var harnessPlans: [String: String]?
 
     struct ManualPrice: Codable, Sendable {
         var input: Double
@@ -48,11 +50,13 @@ struct Config: Codable, Sendable {
         plans: ["ChatGPT Plus": 20, "Claude Pro": 20, "Devin": 20],
         piProviderPlans: ["openai-codex": "ChatGPT Plus", "anthropic": "Claude Pro", "commandcode": "Command Code"],
         priceOverrides: [:],
-        hidden: ["tokenharbor", "zen", "opencode", "opencode-go", "opencode-zen", "b-ai"]
+        hidden: [],
+        harnessPlans: [:]
     )
 
     func plan(for e: UsageEvent) -> String {
-        switch e.harness {
+        if let custom = harnessPlans?[e.harness.rawValue] { return custom }
+        return switch e.harness {
         case .codex: "ChatGPT Plus"
         case .claude: "Claude Pro"
         case .devin: "Devin"

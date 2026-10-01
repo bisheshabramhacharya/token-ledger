@@ -10,7 +10,8 @@ struct Source: Sendable {
 
     static let all: [Source] = [
         Source(roots: [".codex/sessions", ".codex/archived_sessions"], ext: "jsonl", parse: parseCodex),
-        Source(roots: [".claude/projects"], ext: "jsonl", parse: parseClaude),
+        // Newer Claude Code versions write to ~/.config/claude; events are deduped if both exist.
+        Source(roots: [".claude/projects", ".config/claude/projects"], ext: "jsonl", parse: parseClaude),
         Source(roots: [".pi/agent/sessions"], ext: "jsonl", parse: parsePi),
         Source(roots: [".commandcode/projects"], ext: "jsonl", skipSuffix: ".checkpoints.jsonl", parse: parseCommandCode),
         // Devin keeps every call in its session database; transcripts/ only covers some sessions.
