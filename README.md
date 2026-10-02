@@ -10,12 +10,12 @@ A tiny macOS menu bar app that reads the logs your coding CLIs already write
 and shows your token usage and what it would cost at API prices.
 Every agent, plan, and model, in one place.
 
-[**Download**](https://github.com/bisheshabramhacharya/token-ledger/releases/latest/download/TokenLedger.zip) · [Watch the demo](docs/demo.mp4) · macOS 14+ · Apple Silicon & Intel · Free and open source
+[**Download**](https://github.com/bisheshabramhacharya/token-ledger/releases/latest/download/TokenLedger.zip) · macOS 14+ · Apple Silicon & Intel · Free and open source
 
 [![Build](https://github.com/bisheshabramhacharya/token-ledger/actions/workflows/build.yml/badge.svg)](https://github.com/bisheshabramhacharya/token-ledger/actions/workflows/build.yml)
 [![Latest release](https://img.shields.io/github/v/release/bisheshabramhacharya/token-ledger)](https://github.com/bisheshabramhacharya/token-ledger/releases/latest)
 
-<img src="docs/screenshot.png" width="420" alt="Token Ledger showing a month of usage across six coding agents">
+<img src="docs/demo.gif" width="360" alt="Token Ledger demo: daily cost across six coding agents, switching between today, this week and this month">
 
 </div>
 
@@ -134,6 +134,8 @@ rm -rf /Applications/TokenLedger.app ~/Applications/TokenLedger.app "$HOME/Libra
 
 - Droid only stores a running total per session, so each Droid session counts on the day it was last active.
 - Claude Code deletes logs older than 30 days. Token Ledger keeps what it has already read, so your history survives.
+
+If Token Ledger saved you from a surprise bill, a ⭐ helps other people find it.
 
 ## License
 
